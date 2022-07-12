@@ -52,14 +52,14 @@ public class MailUtil {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("zhaoxin_lq@sina.com","15128a3eedcb8356");
+                return new PasswordAuthentication("邮箱","授权码");
             }
         });
         
       //创建邮件
         Message message = new MimeMessage(session);
         //设置收件人地址
-        message.setFrom(new InternetAddress("zhaoxin_lq@sina.com"));
+        message.setFrom(new InternetAddress("邮箱"));
         //抄送
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(toMail));
         //设置邮件的主体
@@ -69,7 +69,7 @@ public class MailUtil {
         		+ "您投递了我校的"+ jobName+"岗位。<br>"
         		+ "目前您的简历已通过层层筛选，现邀请您来我校进行面试和试讲工作。<br>"
         		+ "面试时间等相关事宜可以通过以下联系方式与我们进行进一步的商议和确认。<br>"
-        		+ "13111111111（张先生）  13653227092（赵女士）";
+        		+ "13111111111（张先生）  13666666666（赵女士）";
         message.setContent(msg, "text/html;charset=utf-8");
         //发送邮件
         Transport.send(message);
@@ -86,14 +86,14 @@ public class MailUtil {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("zhaoxin_lq@sina.com","15128a3eedcb8356");
+                return new PasswordAuthentication("邮箱","授权码");
             }
         });
         
       //创建邮件
         Message message = new MimeMessage(session);
         //设置收件人地址
-        message.setFrom(new InternetAddress("zhaoxin_lq@sina.com"));
+        message.setFrom(new InternetAddress("邮箱"));
         //抄送
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(toMail));
         //设置邮件的主体
@@ -103,7 +103,7 @@ public class MailUtil {
         		+ "感谢您投递我校的"+ jobName+"岗位，同时也恭喜您通过了本次的面试与试讲。<br>"
         		+ "您可在下周一8：30-11：30，14：00-19：00来本校办理入职，<br>"
         		+ "若有特殊情况可通过以下联系方式与我们进行进一步的商议和确认，欢迎您的到来。<br>"
-        		+ "13111111111（张先生）  13653227092（赵女生）";
+        		+ "13111111111（张先生）  13666666666（赵女生）";
         message.setContent(msg, "text/html;charset=utf-8");
         //发送邮件
         Transport.send(message);
@@ -120,14 +120,14 @@ public class MailUtil {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("zhaoxin_lq@sina.com","15128a3eedcb8356");
+                return new PasswordAuthentication("邮箱","授权码");
             }
         });
         
       //创建邮件
         Message message = new MimeMessage(session);
         //设置收件人地址
-        message.setFrom(new InternetAddress("zhaoxin_lq@sina.com"));
+        message.setFrom(new InternetAddress("邮箱"));
         //抄送
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(toMail));
         //设置邮件的主体
