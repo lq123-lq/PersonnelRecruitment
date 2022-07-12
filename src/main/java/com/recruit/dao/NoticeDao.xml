@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recruit.dao.NoticeDao">
+
+	<!--添加 -->
+	<insert id ="addNotice" parameterType ="notice">
+		insert into notice(title,info,status,createTime) 
+		values(#{title},#{info},#{status},#{createTime})
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deleteNotice" parameterType="int">
+		delete from notice where id = #{id}
+	</delete>
+	
+	<!-- 修改-->
+	<select id="findNoticeById" resultType="notice" parameterType="int">
+		select * from notice where id = #{id}
+	</select>
+	<update id="updateNotice" parameterType="notice">    
+        update notice set title=#{title}, info=#{info},status=#{status},createTime=#{createTime}
+        where id=#{id}  
+    </update> 
+	
+	<!-- 查询 -->
+	<select id="findNoticeByTitle" resultType="notice" parameterType="String">
+		select * from notice where title like "%"#{title}"%"
+	</select>
+	<select id="displayNoticeTitle" resultType="notice" parameterType="String">
+		select * from notice where status=1
+	</select>
+	<select id="findAllNotice" resultType="notice" parameterType="String">
+		select * from notice
+	</select>		
+
+</mapper>

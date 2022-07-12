@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recruit.dao.CollegeUserDao">
+
+	<sql id="insertField">
+		staffCode,staffName,password,salt,sex,collegeName,status,role
+	</sql>
+	<sql id="selectFields">
+		id,staffCode,sex,collegeName,tel,email,role,status
+	</sql>
+
+	<!-- 登录 -->
+	<select id="findCollegeUser" resultType="CollegeUser">
+		select * from college_user 
+		where staffCode = #{staffCode,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR} 
+		and role = #{role,jdbcType=INTEGER} 
+	</select>
+	
+	<!--添加 -->
+	<insert id ="insertCollegeUser" parameterType ="collegeUser">
+		insert into college_user (<include refid="insertField"></include>)
+		values(#{staffCode},#{staffName},#{password},#{salt},#{sex},#{collegeName},#{status},#{role})
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deleteCollegeUser" parameterType="Integer">
+		delete from college_user where id = #{id}
+	</delete>
+	
+	<!-- 修改-->
+	<select id="findCollegeUserById" resultType="collegeUser" parameterType="Integer">
+		select * from college_user where id = #{id}
+	</select>
+	<update id="updateCollegeUser" parameterType="collegeUser">    
+        update college_user set staffCode=#{staffCode},staffName=#{staffName},sex=#{sex},
+        	collegeName=#{collegeName},tel=#{tel} ,email=#{email}
+        where id=#{id}    
+    </update> 
+	<update id="updateCollegeUser_m" parameterType="collegeUser">    
+        update college_user set staffCode=#{staffCode},staffName=#{staffName},sex=#{sex},
+        	collegeName=#{collegeName},tel=#{tel} ,email=#{email},role=#{role},status=#{status}
+        where id=#{id}    
+    </update> 
+    <update id="updatePassword_1" parameterType="collegeUser">
+		update college_user set salt=#{salt},password = #{password} where id=#{id}
+	</update>
+    
+    <update id="updateCollegeUserRole" parameterType="collegeUser">    
+        update college_user set role=#{role}
+        where id=#{id}    
+    </update>
+    <update id="updateCollegeUserStatus" parameterType="collegeUser">    
+        update college_user set status=#{status}
+        where id=#{id}    
+    </update> 
+	
+	<!-- 查询 -->
+	<select id="findCollegeUserByName" resultType="collegeUser" parameterType="String">
+		select * from college_user where staffName like "%"#{staffName}"%";
+	</select>
+	<select id="findCollegeUserByCode" resultType="collegeUser" parameterType="String">
+		select * from college_user where staffCode=#{staffCode}
+	</select>
+	<select id="findAllCollegeUser" resultType="collegeUser" parameterType="String">
+		select * from college_user 
+	</select>	
+
+</mapper>

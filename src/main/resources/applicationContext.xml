@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        https://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 读取db.properties -->
+	<context:property-placeholder location="classpath:db.properties"/>
+	<!-- 开启注解 -->
+	<context:component-scan base-package="com.recruit.service"></context:component-scan>
+	
+	<!-- 使用dbcp2配置数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>		
+		<property name="maxTotal" value="${jdbc.maxTotal}"></property>
+		<property name="maxIdle" value="${jdbc.maxIdle}"></property>
+		<property name="initialSize" value="${jdbc.initialSize}"></property>					
+	</bean>
+	
+	<!-- 邮件发送器   -->  
+    <!-- <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">  
+        <property name="host" value="${mail.host}" /> 
+        <property name="username" value="${mail.username}" />  
+        <property name="password" value="${mail.password}" />  
+        <property name="defaultEncoding" value="UTF-8"></property>  
+        <property name="javaMailProperties">  
+            <props>  
+                <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>  
+                <prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>  
+                <prop key="mail.smtp.port">${mail.smtp.port}</prop>  
+            </props>  
+        </property>  
+    </bean>  
+
+    <bean id="simpleMailMessage" class="org.springframework.mail.SimpleMailMessage">
+        发件人email
+        <property name="from" value="${mail.username}" />
+    </bean> -->
+
+    <bean id="mailUtil" class="com.recruit.util.MailUtil"></bean>
+        <!-- <property name="mailSender" ref="mailSender"></property>
+        <property name="simpleMailMessage" ref="simpleMailMessage"></property> -->
+    
+	
+	<!-- 配置事务管理 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 开始事务注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- 配置sqlSessionFactory工厂 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	</bean>
+		
+	<!-- mapper代理开发，基于MapperScannerConfig的,自动扫描的形式-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.recruit.dao"></property>
+	</bean> 
+ 
+</beans>

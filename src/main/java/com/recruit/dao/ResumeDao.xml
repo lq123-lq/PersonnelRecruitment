@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recruit.dao.ResumeDao">
+
+	<sql id="insertField">
+		userId,jobId,jobName,married,bred,hobby,collegeName,professionQualify,jobTitle,eduBackground,
+		experiences,scientificResearch,awards,skillCertificate,resumeStatus,interviewStatus,status1,create_time
+	</sql>
+	<sql id="selectFields">
+		id,userId,jobId,jobName,married,bred,hobby,collegeName,professionQualify,jobTitle,eduBackground,
+		experiences,scientificResearch,awards,skillCertificate,resumeStatus,interviewStatus,status1,create_time
+	</sql>
+	<sql id="selectField_view">
+		username,headerUrl,sex,age,tel,email,nation,political,degree,u.experience,major,school,address,unemployed,
+idNumber,married,bred,hobby,jobName,collegeName,professionQualify,jobTitle,eduBackground,r.experience,scientificResearch,awards,skillCertificate
+	</sql>
+
+	<!--添加 -->
+	<insert id ="addResume" parameterType ="resume">
+		insert into resume (userId,married,bred,jobId,jobName,collegeName,hobby,professionQualify,jobTitle,eduBackground,
+		experiences,scientificResearch,awards,skillCertificate,resumeStatus,interviewStatus,status1,create_time)
+		values(#{userId},#{married},#{bred},#{jobId},#{jobName},#{collegeName},#{hobby},#{professionQualify},
+		#{jobTitle},#{eduBackground},#{experiences},#{scientificResearch},#{awards},#{skillCertificate},
+		#{resumeStatus},#{interviewStatus},#{status1},#{createTime});
+	</insert>
+	
+	<select id="findResumeById" resultType="resume" parameterType="Integer">
+		select * from resume where id = #{id}
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteResume" parameterType="int">
+		delete from resume where id = #{id}
+	</delete>
+	
+	<select id="viewResumeById" resultType="map" parameterType="Integer">
+		SELECT r.id,userId,username,headerUrl,sex,age,tel,email,nation,political,degree,u.experience,major,school,address,unemployed,awards,
+			married,bred,hobby,jobName,collegeName,professionQualify,jobTitle,eduBackground,experiences,scientificResearch,skillCertificate,
+			r.resumeStatus,interviewStatus,status1,r.create_time
+		from user u JOIN resume r 
+		ON u.id=r.userId
+		WHERE r.id = #{id};
+	</select>
+	
+	<select id="findResumeByUser" resultType="map" parameterType="Integer">
+		SELECT u.id AS uId,r.id AS rId,jobName,collegeName,r.resumeStatus,r.create_time
+		FROM `user` u JOIN resume r
+		ON u.id=r.userId 
+		WHERE u.id=#{id};
+	</select>
+
+	<update id="updateResumeStatus" parameterType="resume">    
+        update resume set resumeStatus=#{resumeStatus} where id = #{id}    
+    </update> 
+
+	<select id="findUserEmail" resultType="String" parameterType="Integer">
+		SELECT email
+		FROM `user` u JOIN resume r
+		ON u.id=r.userId 
+		WHERE r.id=#{id};
+	</select>
+	
+	<select id="findJobName" resultType="String" parameterType="Integer">
+		SELECT jobName
+		FROM `user` u JOIN resume r
+		ON u.id=r.userId 
+		WHERE r.id=#{id};
+	</select>
+
+	<update id="updateInterviewStatus" parameterType="resume">    
+        update resume set interviewStatus=#{interviewStatus} where id = #{id}    
+    </update> 
+
+	<update id="updateStatus" parameterType="resume">    
+        update resume set status1=#{status1} where id = #{id}    
+    </update> 
+
+	<select id="findResume" resultType="resume" parameterType="String">
+		select * from resume order by id desc limit 1
+	</select>	
+	
+	<select id="findAllResume" resultType="map">
+		SELECT u.id AS uId,r.id AS rId,username,jobName,collegeName,interviewStatus,status1,r.create_time
+		FROM `user` u JOIN resume r
+		ON u.id=r.userId AND r.resumeStatus=1
+	</select>
+	
+	<select id="findCondition_cs" resultType="map">
+		SELECT r.id AS rId,u.id AS userId,j.id AS jobId,u.sex AS uSex ,u.degree AS uDegree,u.experience AS uExperience,
+			j.sex AS jSex,j.degree AS jDegree,j.experience AS jExperience,r.status1
+		FROM `user` u , job j , resume r
+		WHERE u.id=r.userId AND j.id = r.jobId AND r.resumeStatus=1 and status1='cs_1' ;
+	</select>
+	
+	<select id="findAllResume_cs" resultType="map">
+		SELECT u.id AS uId,r.id AS rId,username,jobName,collegeName,interviewStatus,status1,r.create_time
+		FROM `user` u JOIN resume r
+		ON u.id=r.userId 
+		WHERE r.resumeStatus=1 AND status1='cs_1';
+	</select>
+	
+	<select id="findAllResume_jl" resultType="map">
+		SELECT u.id AS uId,r.id AS rId,username,jobName,collegeName,interviewStatus,status1,r.create_time
+		FROM `user` u JOIN resume r
+		ON u.id=r.userId 
+		WHERE r.resumeStatus=1 AND status1='jl_1';
+	</select>
+	
+	<select id="findApplyUserByJobName" resultType="map">
+		SELECT u.id AS uId,r.id AS rId,username,jobName,collegeName,interviewStatus,status1,r.create_time
+		FROM `user` u JOIN resume r
+		ON u.id=r.userId
+		WHERE jobName LIKE "%"#{jobName}"%";
+		
+	</select>
+
+</mapper>

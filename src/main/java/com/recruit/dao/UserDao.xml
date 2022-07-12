@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recruit.dao.UserDao">
+
+	<sql id="selectFields">
+		id,usercode,username,password,salt,activationCode,tel,email,status,headerUrl,create_time,nation,sex,age,political,degree,major,school,experience,address,unemployed,resumeStatus
+	</sql>
+	<sql id="insertField">
+		usercode,password,salt,email,headerUrl,status,activationCode,resumeStatus,create_time
+	</sql>
+	<sql id="insertFields">
+		usercode,username,password,salt,tel,email,status,activationCode,headerUrl,resumeStatus,create_time,nation,sex,age,political,degree,major,school,experience,address,unemployed
+	</sql>
+
+	<resultMap id="user" type="user">
+		<id column="id" property="id"></id>
+	</resultMap>
+
+	<!-- 注册 -->
+	<insert id="insertUser" parameterType="User"><!--keyProperty="id"-->
+		insert into user (<include refid="insertField"></include>)
+		values(#{usercode},#{password},#{salt},#{email},#{headerUrl},#{status},#{activationCode},#{resumeStatus},#{createTime})
+	</insert>
+
+	<!-- 登录 -->
+	<select id="findUser" resultType="User">
+		select * from user
+		where usercode = #{usercode} and password = #{password}
+	</select>
+	
+	<select id="findUserById" resultType="User" parameterType="Integer">
+		select * from user where id = #{id}
+	</select>
+
+	<select id="selectByCode" resultType="User" parameterType="String">
+		select *
+		from user
+		where usercode = #{usercode}
+	</select>
+	
+	<select id="findUserByactivationCode" resultType="User">
+		select <include refid="selectFields"></include>
+		from user
+		where activationCode = #{activationCode}
+	</select>
+	<update id="updateStatus" parameterType="User">
+		update user set status=#{status} where id=#{id}
+	</update>
+
+	<select id="selectByEmail" resultType="User">
+		select <include refid="selectFields"></include>
+		from user
+		where email = #{email}
+	</select>
+	
+	<select id="findUserEmailTojl" resultType="String" parameterType="Integer">
+		select email from user where id = #{id}
+	</select>
+
+	<update id="updateUser" parameterType="User">
+		update user set usercode = #{usercode},username=#{username},sex=#{sex},age=#{age},nation=#{nation},
+		political=#{political},tel=#{tel},email=#{email},degree=#{degree},major=#{major},school=#{school},
+		address=#{address},experience=#{experience},unemployed=#{unemployed} where id=#{id}
+	</update>
+	<update id="updateUser_m" parameterType="User">
+		update user set role=#{role},status=#{status} where id=#{id}
+	</update>
+	
+	<update id="updatePassword" parameterType="User">
+		update user set salt=#{salt},password = #{password} where id=#{id}
+	</update>
+	
+	<update id="updateResumeStatus" parameterType="User">
+		update user set resumeStatus=1
+		where id = (SELECT r.userId FROM resume r WHERE r.id=#{id});
+	</update>
+	
+	<update id="updateUserRole" parameterType="User">
+		update user set role = #{role} where id=#{id}
+	</update>
+	
+	<select id="findAllUser" resultType="User">
+		select * from user
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteUser" parameterType="int">
+		delete from user where id = #{id}
+	</delete>
+
+	<update id="updateHeader" parameterType="User">
+		update user set headerUrl = #{headerUrl} where id=#{id}
+	</update>
+
+
+</mapper>

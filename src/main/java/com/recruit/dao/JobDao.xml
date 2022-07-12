@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recruit.dao.JobDao">
+	<sql id="selectFields">
+		id,title,jobName,jobType,collegeName,jobInfo,salary,number,sex,age,degree,experience,`condition`,
+		staffName,tel,email,status,createTime
+	</sql>
+	<sql id="insertFields">
+		title,jobName,jobType,collegeName,jobInfo,salary,number,sex,age,degree,experience,`condition`,
+		staffName,tel,email,status,createTime
+	</sql>
+	
+	<!--添加 -->
+	<insert id ="addJob" parameterType ="job">
+		insert into job (<include refid="insertFields"></include>)
+		values(#{title},#{jobName},#{jobType},#{collegeName},#{jobInfo},#{salary},#{number},#{sex},#{age},#{degree},
+			#{experience},#{condition},#{staffName},#{tel},#{email},#{status},#{createTime})
+	</insert>
+	<insert id ="addRequire" parameterType ="job">
+		insert into job (jobName,jobType,collegeName,jobInfo,number,sex,age,degree,experience,`condition`,status,createTime)
+		values(#{jobName},#{jobType},#{collegeName},#{jobInfo},#{number},#{sex},#{age},#{degree},
+			#{experience},#{condition},#{status},#{createTime})
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deleteJob" parameterType="int">
+		delete from job where id = #{id}
+	</delete>
+	
+	<!-- 修改-->
+	<select id="findJobById" resultType="job" parameterType="int">
+		select <include refid="selectFields"></include> from job where id = #{id}
+	</select>
+	<update id="updateJob" parameterType="job">    
+        update job set title=#{title},jobName=#{jobName}, jobType=#{jobType},collegeName=#{collegeName},jobInfo=#{jobInfo},
+        salary=#{salary},number=#{number},sex=#{sex},age=#{age},degree=#{degree},experience=#{experience},
+        `condition`=#{condition},staffName=#{staffName},tel=#{tel},email=#{email},status=#{status},createTime=#{createTime}
+        where id = #{id}    
+    </update> 
+    <update id="updateRequire" parameterType="job">    
+        update job set jobName=#{jobName}, jobType=#{jobType},collegeName=#{collegeName},jobInfo=#{jobInfo},
+        number=#{number},sex=#{sex},age=#{age},degree=#{degree},experience=#{experience},
+        `condition`=#{condition},status=#{status},createTime=#{createTime}
+        where id = #{id}    
+    </update> 
+	
+	<!-- 查询 -->
+	<select id="findJobByName" resultType="job" parameterType="String">
+		select * from job where jobName like "%"#{jobName}"%"
+	</select>
+	
+	<select id="displayJobTitle" resultType="job" parameterType="String">
+		select * from job where status=1
+	</select>
+	<select id="findJobByTitle" resultType="job" parameterType="String">
+		select * from job where title = #{title} 
+	</select>
+	<select id="findAllJob" resultType="job">
+		SELECT * FROM job where status=0 or status=1;
+	</select>
+	<select id="findAllRequire" resultType="job">
+		SELECT * FROM job;
+	</select>
+	
+	<select id="findJobName" resultType="job">
+		SELECT jobName FROM job where status = 1;
+	</select>		
+
+</mapper>
