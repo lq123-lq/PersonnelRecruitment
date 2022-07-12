@@ -23,14 +23,14 @@ public class MailUtil {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("zhaoxin_lq@sina.com","15128a3eedcb8356");
+                return new PasswordAuthentication("邮箱","授权码");
             }
         });
         
       //创建邮件
         Message message = new MimeMessage(session);
         //设置收件人地址
-        message.setFrom(new InternetAddress("zhaoxin_lq@sina.com"));
+        message.setFrom(new InternetAddress("邮箱"));
         //抄送
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(toMail));
         //设置邮件的主体
