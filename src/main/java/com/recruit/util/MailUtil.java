@@ -65,11 +65,11 @@ public class MailUtil {
         //设置邮件的主体
         message.setSubject("面试邀请");
         //设置内容
-        String msg="<h2>您好，这里是河北工程技术学院人事处</h2>"
+        String msg="<h2>您好，这里是XX大学人事处</h2>"
         		+ "您投递了我校的"+ jobName+"岗位。<br>"
         		+ "目前您的简历已通过层层筛选，现邀请您来我校进行面试和试讲工作。<br>"
         		+ "面试时间等相关事宜可以通过以下联系方式与我们进行进一步的商议和确认。<br>"
-        		+ "13111111111（张先生）  13666666666（赵女士）";
+        		+ "13111111111（张先生）  13666666666（小仙女）";
         message.setContent(msg, "text/html;charset=utf-8");
         //发送邮件
         Transport.send(message);
@@ -99,11 +99,11 @@ public class MailUtil {
         //设置邮件的主体
         message.setSubject("入职通知");
         //设置内容
-        String msg="<h2>您好，这里是河北工程技术学院人事处</h2>"
+        String msg="<h2>您好，这里是XX大学人事处</h2>"
         		+ "感谢您投递我校的"+ jobName+"岗位，同时也恭喜您通过了本次的面试与试讲。<br>"
         		+ "您可在下周一8：30-11：30，14：00-19：00来本校办理入职，<br>"
         		+ "若有特殊情况可通过以下联系方式与我们进行进一步的商议和确认，欢迎您的到来。<br>"
-        		+ "13111111111（张先生）  13666666666（赵女生）";
+        		+ "13111111111（张先生）  13666666666（小仙女）";
         message.setContent(msg, "text/html;charset=utf-8");
         //发送邮件
         Transport.send(message);
@@ -133,7 +133,7 @@ public class MailUtil {
         //设置邮件的主体
         message.setSubject("简历投递邀请~");
         //设置内容
-        String msg="<h2>您好，这里是河北工程技术学院人事处</h2>"
+        String msg="<h2>您好，这里是XX大学人事处</h2>"
         		+ "当您收到这封邮件，说明我们对您很感兴趣~<br>"
         		+ "目前本校的招聘岗位有："+ jobNameList +"等，如果有兴趣的话 就来积极的投递简历吧~~<br>"
         		+ "可以点击<a href='http://localhost:8080/PersonnelRecruitment/displayJobTitle'>此链接</a>跳转至招聘信息哦~<br>";
