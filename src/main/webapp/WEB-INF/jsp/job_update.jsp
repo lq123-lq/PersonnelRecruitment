@@ -17,7 +17,7 @@
 <div id="main-wrapper">
         <div class="nav-header">
             <a href="" class="brand-logo">
-				<img class="logo-abbr" alt="河工人事招聘管理系统" src="images/xiaohui.png" >
+				<img class="logo-abbr" alt="XX大学人事招聘管理系统" src="images/xiaohui.png" >
 				<p class="brand-title" style="font-size:15px;margin-top:20px;">人事招聘管理系统</p>
             </a>
             <div class="nav-control">
