@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>人才招聘 - 河北工程技术学院</title>
+<title>人才招聘 - XX大学</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"> 
 <link rel="icon" href="//res.hbgcjsxy.com/statics/skin/favicon.ico">
@@ -537,10 +537,10 @@
 					</div>
 					<div class="col-xs-9">
 						<ul class="footer-text-list">
-							<li>地址：河北省石家庄市桥西区宫北路11号 </li>
-							<li>邮编：050091</li>
-							<li>校办电话：0311-83831598 </li>
-							<li>招生电话：0311-89653577/88/99</li>
+							<li>地址：XX大学 </li>
+							<li>邮编：  </li>
+							<li>校办电话：   </li>
+							<li>招生电话：   </li>
 						</ul>
 					</div>
 				</div>
@@ -550,8 +550,8 @@
 					</div>
 					<div class="col-xs-9">
 						<ul class="footer-text-list">
-							<li>河北工程技术学院微平台 </li>
-							<li>微信号 hegongweipingtai</li>
+							<li>XX大学微平台 </li>
+							<li>微信号  </li>
 							<li>关注我们，及时了解学校最新</li>
 							<li>动态、通知公告等信息。</li>
 						</ul>
@@ -568,8 +568,8 @@
 					<script src="http://dcs.conac.cn/js/05/000/0000/60664728/CA050000000606647280002.js" type="text/javascript"></script><span id="_ideConac"></span>
 				</div>
 				<div class="col-xs-9 footer-text2-p">
-					河北工程技术学院网站 版权所有 转载请注明出处
-					<a href="https://beian.miit.gov.cn">冀ICP备14011511号</a> <br> 技术支持：宣传与信息化中心 管理员邮箱： admin@hbgcjsxy.com
+					XX大学网站 版权所有 转载请注明出处
+					<a href="https://beian.miit.gov.cn">冀ICP备14011511号</a> <br> 技术支持：宣传与信息化中心 管理员邮箱：  
 				</div>
 			</div>
 		</div> 
